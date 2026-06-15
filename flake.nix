@@ -28,11 +28,23 @@
         };
       });
 
-      apps = forAllSystems (pkgs: {
-        default = {
-          type = "app";
-          program = "${self.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/cpu-latency";
-        };
-      });
+      apps = forAllSystems (pkgs:
+        let
+          system = pkgs.stdenv.hostPlatform.system;
+          pythonEnv = pkgs.python3.withPackages (ps: [ ps.matplotlib ps.numpy ]);
+          cpu-latency-plot = pkgs.writeShellScriptBin "cpu-latency-plot" ''
+            exec ${pythonEnv}/bin/python3 ${self.packages.${system}.default}/bin/cpu-latency-plot "$@"
+          '';
+        in
+        {
+          default = {
+            type = "app";
+            program = "${self.packages.${system}.default}/bin/cpu-latency";
+          };
+          cpu-latency-plot = {
+            type = "app";
+            program = "${cpu-latency-plot}/bin/cpu-latency-plot";
+          };
+        });
     };
 }
