@@ -22,7 +22,17 @@ OPTIONS:
 -h,  --help                  Display available options
 ```
 
-### Build
+### Nix Build
+
+With [`nix`](https://nixos.org/) installed you can run the binary directly from the github repo without cloning it
+or installing any other system dependencies manually. Simply run:
+```sh
+nix run github:SoilRos/cpu-latency#default > cpu-latency.csv
+nix run github:SoilRos/cpu-latency#cpu-latency-plot -- -i cpu-latency.csv -o cpu-latency.png
+```
+Thats it. The package definition can be found in `flake.nix`
+
+### Manual Build
 
 This program requires the `hwloc` API in order to bind threads and memory. Make sure to have it available on your system, for example:
 

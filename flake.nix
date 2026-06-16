@@ -37,7 +37,8 @@
           '';
         in
         {
-          default = {
+          default = self.apps.${system}.cpu-latency;
+          cpu-latency = {
             type = "app";
             program = "${self.packages.${system}.default}/bin/cpu-latency";
           };
