@@ -24,7 +24,7 @@ OPTIONS:
 
 ### Nix Build
 
-With [`nix`](https://nixos.org/) installed you can run the binary directly from the github repo without cloning it
+With [`nix`](https://nixos.org/download/) installed you can run the binary directly from the github repo without cloning it
 or installing any other system dependencies manually. Simply run:
 ```sh
 nix run github:SoilRos/cpu-latency#default > cpu-latency.csv
